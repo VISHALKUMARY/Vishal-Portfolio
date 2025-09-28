@@ -12,13 +12,8 @@ import Cards from "./Cards";
 const Projects = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageClick = (item) => {
-    setSelectedImage(item);
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
+  const handleImageClick = (item) => setSelectedImage(item);
+  const closeModal = () => setSelectedImage(null);
 
   const projectJson = [
     {
@@ -82,7 +77,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative bg-gradient-to-b from-gray-800 to-gray-900 text-white py-16 px-4"
+      className="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-4"
     >
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-4xl font-extrabold tracking-tight mb-10 border-b-4 border-red-500 inline-block pb-2">
@@ -93,7 +88,7 @@ const Projects = () => {
           {projectJson.map((item, index) => (
             <div
               key={index}
-              className="w-full transform transition duration-300 hover:scale-105"
+              className="w-full transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 rounded-2xl"
             >
               <Cards item={item} onImageClick={handleImageClick} />
             </div>
@@ -103,25 +98,50 @@ const Projects = () => {
 
       {/* ===== Image Modal ===== */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center px-4">
-          <div className="relative max-w-3xl w-full bg-gray-900 p-6 rounded-lg shadow-lg">
-            {/* Close Icon */}
+        <div
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center px-4"
+          onClick={closeModal}
+        >
+          <div
+            className="relative max-w-3xl w-full bg-gray-800 p-6 rounded-2xl shadow-2xl border-2 border-red-500"
+            onClick={(e) => e.stopPropagation()} // prevent modal close on inner click
+          >
             <button
               onClick={closeModal}
-              className="absolute top-3 right-4 text-white text-3xl font-bold hover:text-pink-500 transition"
+              className="absolute top-3 right-4 text-white text-3xl font-bold hover:text-red-500 transition"
             >
               &times;
             </button>
 
-            {/* Full Image and Title */}
-            <h3 className="text-2xl font-semibold mb-4 text-center text-pink-400">
+            <h3 className="text-2xl font-semibold mb-4 text-center text-red-400">
               {selectedImage.title}
             </h3>
             <img
               src={selectedImage.image}
               alt={selectedImage.title}
-              className="w-full h-auto max-h-[70vh] object-contain rounded-md"
+              className="w-full h-auto max-h-[75vh] object-contain rounded-lg border border-red-400/50 shadow-lg"
             />
+
+            <div className="flex justify-center gap-4 mt-4">
+              {selectedImage.live && (
+                <a
+                  href={selectedImage.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-red-500 px-4 py-2 rounded-full text-white font-medium hover:bg-red-600 shadow-md transition"
+                >
+                  Live Demo
+                </a>
+              )}
+              <a
+                href={selectedImage.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-red-500 px-4 py-2 rounded-full text-white font-medium hover:bg-red-500 hover:text-white shadow-md transition"
+              >
+                GitHub
+              </a>
+            </div>
           </div>
         </div>
       )}

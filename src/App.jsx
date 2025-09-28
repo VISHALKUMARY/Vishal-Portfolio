@@ -5,17 +5,27 @@ import Project from './component/Project';
 import Contact from './component/Contact';
 import Footer from './component/Footer';
 import Particle from './component/Particles';
+import Cursor from './component/Cursor';
+import ChatBot from "./component/ChatBot.jsx";
 
 function App() {
   return (
     <div className="relative overflow-hidden">
       {/* Particle Background */}
-      <Particle />
+      <div className="absolute inset-0 -z-10">
+        <Particle />
+      </div>
 
-      {/* Navbar */}
+      {/* Floating ChatBot */}
+      <div className="fixed bottom-5 right-5 z-50">
+        <ChatBot />
+      </div>
+
+      {/* Custom Cursor */}
+      <Cursor />
+
+      {/* Main Content */}
       <Navbar />
-
-      {/* Main Sections */}
       <Hero />
       <About />
       <Project />

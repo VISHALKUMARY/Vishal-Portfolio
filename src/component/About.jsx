@@ -13,34 +13,78 @@ import Express from "../assets/Express.png";
 
 const About = () => {
   return (
-    <section className="relative bg-gray-100 py-16" id="about">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        <div className="text-center mb-12">
-          <h2 className="text-lg text-red-600 font-bold uppercase tracking-wider">About Me</h2>
-          <p className="mt-2 text-4xl sm:text-5xl font-extrabold text-gray-900">Hi, I'm Vishal Kumar</p>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-            A Full-Stack Developer with expertise in web development, SEO, and the MERN stack.
+    <section
+      id="about"
+      className="relative bg-gray-800 from-gray-50 via-white to-gray-100 overflow-hidden"
+    >
+      {/* ===== Decorative Wave Top ===== */}
+      <div className="absolute top-0 left-0 w-full -translate-y-1">
+        <svg
+          className="w-full h-24 sm:h-32 md:h-40 fill-white"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path d="M0,160L48,165.3C96,171,192,181,288,192C384,203,480,213,576,208C672,203,768,181,864,149.3C960,117,1056,75,1152,69.3C1248,64,1344,96,1392,112L1440,128V0H0Z" />
+        </svg>
+      </div>
+
+      {/* ===== Floating Glow Background ===== */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 -left-28 w-[30rem] h-[30rem]  rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-8rem] right-[-6rem] w-[28rem] h-[28rem]  rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32">
+        {/* ===== Heading ===== */}
+        <div className="text-center mb-20 animate-fade-in">
+          <h2 className="text-xs sm:text-sm md:text-base text-red-600 font-bold uppercase tracking-[0.25em]">
+            About Me
+          </h2>
+          <p className="mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">
+            Hi, I’m Vishal Kumar
+          </p>
+          <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-white leading-relaxed">
+            A Full-Stack Developer passionate about crafting intuitive,
+            scalable, and beautiful web applications with the powerful MERN
+            stack.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-          {/* My Journey Section */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900">My Journey</h3>
-            <p className="mt-4 text-gray-700 text-[1.05rem] leading-relaxed">
-              I started my journey in web development with a passion for building intuitive and scalable applications.
-              With proficiency in the MERN stack (MongoDB, Express.js, React, and Node.js), I’ve built full-stack projects
-              such as <span className="font-semibold text-red-500">Devpost</span> and <span className="font-semibold text-red-500">TaskTrek</span> — a task management platform
-              with real-time updates and collaboration. On the frontend, I've created dynamic projects like a responsive
-              <span className="font-semibold text-red-500"> Food Ordering App</span> with user-centric design and filtering features.
+        {/* ===== Journey & Skills ===== */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+          {/* ---- Journey ---- */}
+          <div className="animate-slide-up">
+            <h3 className="text-3xl font-bold text-white mb-6">My Journey</h3>
+            <p className="text-white text-[1.05rem] leading-relaxed">
+              I began my web development journey driven by a passion for
+              building intuitive and scalable applications. With strong command
+              of the MERN stack (MongoDB, Express.js, React, and Node.js), I’ve
+              created projects such as{" "}
+              <span className="font-semibold text-red-500">Devpost</span> and{" "}
+              <span className="font-semibold text-red-500">TaskTrek</span> — a
+              real-time task management platform. On the frontend, I’ve crafted
+              dynamic interfaces like a responsive{" "}
+              <span className="font-semibold text-red-500">
+                Food Ordering App
+              </span>{" "}
+              with elegant UI and advanced filtering features.
             </p>
-            <img src={mernstack} alt="MERN stack" className="w-52 mt-6 rounded-lg shadow-lg border border-red-200 p-2" />
+            <img
+              src={mernstack}
+              alt="MERN stack"
+              className="w-60 mt-10 rounded-xl shadow-xl border border-red-200/70 p-3
+                         hover:scale-105 hover:shadow-2xl transition-transform duration-300"
+            />
           </div>
 
-          {/* Skills & Expertise Section */}
-          <div className="border border-red-200 rounded-2xl p-8 bg-white shadow-xl hover:shadow-red-300 transition-shadow">
-            <h3 className="text-2xl font-semibold text-red-600 mb-6 text-center">Skills & Expertise</h3>
-            <div className="flex flex-wrap justify-center gap-4">
+          {/* ---- Skills ---- */}
+          <div className="backdrop-blur-md border border-red-200 rounded-2xl p-10 
+                          bg-white/80 dark:bg-gray-800/80 shadow-xl
+                          hover:shadow-red-300/70 transition-shadow duration-300 animate-slide-up">
+            <h3 className="text-3xl font-semibold text-white mb-10 text-center">
+              Skills & Expertise
+            </h3>
+            <div className="flex flex-wrap justify-center gap-5">
               {[
                 { img: Html, label: "HTML" },
                 { img: CSS, label: "CSS" },
@@ -55,22 +99,32 @@ const About = () => {
               ].map((skill, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 px-3 py-2 border border-red-300 rounded-lg shadow-sm bg-gray-50 hover:shadow-md transition-all duration-200"
+                  className="group flex items-center gap-3 px-4 py-2
+                             border border-red-300 rounded-xl bg-gray-50/80 dark:bg-gray-700/80
+                             shadow-sm hover:border-red-400 hover:bg-white/90 dark:hover:bg-gray-600
+                             hover:scale-105 transition-all duration-300"
                 >
-                  <img src={skill.img} alt={skill.label} className="w-8 h-8 object-contain" />
-                  <span className="font-medium text-gray-800">{skill.label}</span>
+                  <img
+                    src={skill.img}
+                    alt={skill.label}
+                    className="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
+                  />
+                  <span className="font-medium text-gray-800 dark:text-gray-100 group-hover:text-red-600">
+                    {skill.label}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* More About Me */}
-        <div className="mt-16 text-center max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold text-gray-900">More About Me</h3>
-          <p className="mt-4 text-lg text-gray-700 leading-relaxed">
-            Apart from coding, I enjoy learning new technologies and staying updated with web development trends.
-            I also run a YouTube channel where I spread news on tech, sports, and other current affairs.
+        {/* ===== More About Me ===== */}
+        <div className="mt-24 text-center max-w-3xl mx-auto animate-fade-in">
+          <h3 className="text-3xl font-bold text-white">More About Me</h3>
+          <p className="mt-6 text-lg sm:text-xl text-white leading-relaxed">
+            Beyond coding, I love exploring emerging technologies and keeping up
+            with modern web trends. I also run a YouTube channel where I share
+            updates on tech, sports, and global current affairs.
           </p>
         </div>
       </div>
