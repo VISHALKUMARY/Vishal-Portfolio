@@ -179,189 +179,177 @@ const About = () => {
         </div>
 
         {/* === Education Section === */}
-        <motion.div
-          className="mt-24 max-w-6xl mx-auto px-6 sm:px-10 lg:px-16"
-          variants={fadeIn("up", 0.4)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+<motion.div
+  className="mt-20 max-w-6xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16"
+  variants={fadeIn("up", 0.4)}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true }}
+>
+  {/* === Education Section === */}
+  <section className="mb-20 sm:mb-28 bg-gray-900 bg-opacity-60 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-xl sm:shadow-2xl border border-red-700">
+    <h3 className="flex items-center justify-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-10 sm:mb-14 gap-3 underline decoration-red-500 underline-offset-6 sm:underline-offset-8 select-none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 sm:h-10 sm:w-10 text-red-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+        aria-hidden="true"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z"
+        />
+      </svg>
+      Education
+    </h3>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-14 text-white">
+      {[
+        {
+          logo: schoolLogo,
+          alt: "10th Grade",
+          title: "10th Grade",
+          subtitle: "PBSE Board",
+          year: "2019",
+          prac: 60,
+          border: "border-red-500",
+        },
+        {
+          logo: collegeLogo,
+          alt: "12th Grade",
+          title: "12th Grade",
+          subtitle: "PBSE Board",
+          year: "2021",
+          prac: 70,
+          border: "border-red-500",
+        },
+        {
+          logo: universityLogo,
+          alt: "B.Tech",
+          title: "B.Tech in Computer Science",
+          subtitle: "Lyallpur Khalsa College Jalandhar",
+          year: "2021-2025",
+          CGPA: 6.57,
+          border: "border-red-500",
+          colSpanFull: true,
+        },
+      ].map(
+        ({ logo, alt, title, subtitle, year, border, colSpanFull, prac, CGPA }, i) => (
+          <div
+            key={i}
+            className={`relative bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 ${border} border-l-4 sm:border-l-6 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl transition-all duration-300 sm:hover:scale-[1.05] sm:hover:shadow-red-600/50 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 ${
+              colSpanFull ? "md:col-span-2 justify-center" : ""
+            }`}
+          >
+            <img
+              src={logo}
+              alt={alt}
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain rounded-lg drop-shadow-md"
+              loading="lazy"
+              draggable={false}
+            />
+            <div className="flex flex-col w-full max-w-full sm:max-w-[360px] text-center sm:text-left">
+              <h4 className="text-xl sm:text-2xl font-semibold text-white mb-1 tracking-wide">
+                {title}
+              </h4>
+              <p className="text-gray-300 text-sm font-medium tracking-wide">{subtitle}</p>
+              <p className="mt-1 text-gray-400 font-mono tracking-wide">{year}</p>
+
+              {(prac || CGPA) && (
+                <div className="mt-4">
+                  <div className="flex justify-between items-center mb-1 text-xs">
+                    <span className="font-semibold text-white select-none">
+                      {prac ? "Percentage" : "CGPA"}
+                    </span>
+                    <span className="font-mono text-gray-300 select-none">
+                      {prac ? `${prac}%` : CGPA}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+                    <div
+                      className="h-2 bg-red-500 rounded-full transition-all duration-700"
+                      style={{ width: prac ? `${prac}%` : `${(CGPA / 10) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )
+      )}
+    </div>
+  </section>
+
+  {/* === Experience Section === */}
+  <section className="mb-16 sm:mb-24 bg-gray-900 bg-opacity-60 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-xl sm:shadow-2xl border border-green-700">
+    <h3 className="flex items-center justify-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-10 sm:mb-14 gap-3 underline decoration-green-500 underline-offset-6 sm:underline-offset-8 select-none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 sm:h-10 sm:w-10 text-green-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+        aria-hidden="true"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2a4 4 0 014-4h1" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M13 7h6m-3-3v6m-3 6v3m-6-3v3"
+        />
+      </svg>
+      Experience
+    </h3>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-14 text-white">
+      {[
+        {
+          logo: "https://novemcontrols.com/wp-content/uploads/2025/05/novem_controls-removebg-preview.webp",
+          alt: "Internship",
+          title: "6-Week Industrial Training",
+          subtitle: "MERN Stack Developer",
+          year: "Jan-July 2025",
+          border: "border-green-500",
+          colSpanFull: true,
+        },
+        {
+          logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdw4Xn2-gYhvjx4OrSwNBCX1z-HNfRSPcgJw&s",
+          alt: "Industrial Training",
+          title: "45-Days Training",
+          subtitle: "Frontend Developer",
+          year: "Jul-Aug 2023",
+          border: "border-green-500",
+        },
+      ].map(({ logo, alt, title, subtitle, year, border, colSpanFull }, i) => (
+        <div
+          key={i}
+          className={`relative bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 ${border} border-l-4 sm:border-l-6 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-lg sm:shadow-xl transition-all duration-300 sm:hover:scale-[1.05] sm:hover:shadow-green-600/50 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 ${
+            colSpanFull ? "md:col-span-2 justify-center" : ""
+          }`}
         >
-          {/* === Education Section === */}
-          <section className="mb-32 bg-gray-900 bg-opacity-60 rounded-3xl p-10 shadow-2xl border border-red-700">
-            <h3 className="flex items-center justify-center text-4xl font-extrabold text-white mb-14 gap-3 underline decoration-red-500 underline-offset-8 select-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-10 w-10 text-red-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 14l9-5-9-5-9 5 9 5z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z"
-                />
-              </svg>
-              Education
-            </h3>
-
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-14 text-white">
-              {[
-                {
-                  logo: schoolLogo,
-                  alt: "10th Grade",
-                  title: "10th Grade",
-                  subtitle: "PBSE Board",
-                  year: "2019",
-                  prac: 60,
-                  border: "border-red-500",
-                },
-                {
-                  logo: collegeLogo,
-                  alt: "12th Grade",
-                  title: "12th Grade",
-                  subtitle: "PBSE Board",
-                  year: "2021",
-                  prac: 70,
-                  border: "border-red-500",
-                },
-                {
-                  logo: universityLogo,
-                  alt: "B.Tech",
-                  title: "B.Tech in Computer Science",
-                  subtitle: "Lyallpur Khalsa College Jalandhar",
-                  year: "2021-2025",
-                  CGPA: 6.57,
-                  border: "border-red-500",
-                  colSpanFull: true,
-                },
-              ].map(
-                (
-                  { logo, alt, title, subtitle, year, border, colSpanFull, prac, CGPA },
-                  i
-                ) => (
-                  <div
-                    key={i}
-                    className={`relative bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 ${border} border-l-6 p-8 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.05] hover:shadow-red-600/50 flex items-center gap-8 ${
-                      colSpanFull ? "col-span-full justify-center" : ""
-                    }`}
-                  >
-                    <img
-                      src={logo}
-                      alt={alt}
-                      className="w-24 h-24 object-contain rounded-lg drop-shadow-md"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                    <div className="flex flex-col max-w-[360px]">
-                      <h4 className="text-2xl font-semibold text-white mb-1 tracking-wide">
-                        {title}
-                      </h4>
-                      <p className="text-gray-300 text-sm font-medium tracking-wide">
-                        {subtitle}
-                      </p>
-                      <p className="mt-1 text-gray-400 font-mono tracking-wide">{year}</p>
-
-                      {/* Show progress bar if available */}
-                      {(prac || CGPA) && (
-                        <div className="mt-4">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-xs font-semibold text-white select-none">
-                              {prac ? "Percentage" : "CGPA"}
-                            </span>
-                            <span className="text-xs font-mono text-gray-300 select-none">
-                              {prac ? `${prac}%` : CGPA}
-                            </span>
-                          </div>
-                          <div className="w-full h-2 bg-white rounded-full overflow-hidden">
-                            <div
-                              className="h-2 bg-red-500 rounded-full transition-all duration-700"
-                              style={{ width: prac ? `${prac}%` : `${(CGPA / 10) * 100}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-          </section>
-
-          {/* === Experience Section === */}
-          <section className="mb-24 bg-gray-900 bg-opacity-60 rounded-3xl p-10 shadow-2xl border border-green-700">
-            <h3 className="flex items-center justify-center text-4xl font-extrabold text-white mb-14 gap-3 underline decoration-green-500 underline-offset-8 select-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-10 w-10 text-green-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2a4 4 0 014-4h1" />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 7h6m-3-3v6m-3 6v3m-6-3v3"
-                />
-              </svg>
-              Experience
-            </h3>
-
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-14 text-white">
-              {[
-                {
-                  logo: "https://novemcontrols.com/wp-content/uploads/2025/05/novem_controls-removebg-preview.webp",
-                  alt: "Internship",
-                  title: "6-Week Industrial Training",
-                  subtitle: "MERN Stack Developer",
-                  year: "Jan-July 2025",
-                  border: "border-green-500",
-                  colSpanFull: true,
-                },
-                {
-                  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdw4Xn2-gYhvjx4OrSwNBCX1z-HNfRSPcgJw&s",
-                  alt: "Industrial Training",
-                  title: "45-Days Training",
-                  subtitle: "Frontend Developer",
-                  year: "Jul-Aug 2023",
-                  border: "border-green-500",
-                },
-              ].map(
-                ({ logo, alt, title, subtitle, year, border, colSpanFull }, i) => (
-                  <div
-                    key={i}
-                    className={`relative bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 ${border} border-l-6 p-8 rounded-3xl shadow-xl transition-transform duration-300 hover:scale-[1.05] hover:shadow-green-600/50 flex items-center gap-8 ${
-                      colSpanFull ? "col-span-full justify-center" : ""
-                    }`}
-                  >
-                    <img
-                      src={logo}
-                      alt={alt}
-                      className="w-24 h-24 object-contain rounded-lg drop-shadow-md"
-                      loading="lazy"
-                      draggable={false}
-                    />
-                    <div className="flex flex-col max-w-[360px]">
-                      <h4 className="text-2xl font-semibold text-white mb-1 tracking-wide">{title}</h4>
-                      <p className="text-gray-300 text-sm font-medium tracking-wide">{subtitle}</p>
-                      <p className="mt-1 text-gray-400 font-mono tracking-wide">{year}</p>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-          </section>
-        </motion.div>
+          <img
+            src={logo}
+            alt={alt}
+            className="w-20 h-20 sm:w-24 sm:h-24 object-contain rounded-lg drop-shadow-md"
+            loading="lazy"
+            draggable={false}
+          />
+          <div className="flex flex-col w-full max-w-full sm:max-w-[360px] text-center sm:text-left">
+            <h4 className="text-xl sm:text-2xl font-semibold text-white mb-1 tracking-wide">{title}</h4>
+            <p className="text-gray-300 text-sm font-medium tracking-wide">{subtitle}</p>
+            <p className="mt-1 text-gray-400 font-mono tracking-wide">{year}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</motion.div>
       </div>
     </section>
   );
