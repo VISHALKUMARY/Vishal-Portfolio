@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, User, FolderKanban, Mail } from "lucide-react"; // Icons for nav items
+import { Menu, X, User, FolderKanban, Mail } from "lucide-react";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

@@ -6,7 +6,7 @@ import Contact from './component/Contact';
 import Footer from './component/Footer';
 import Particle from './component/Particles';
 import Cursor from './component/Cursor';
-import ChatBot from "./component/ChatBot.jsx";
+// import ChatBot from "./component/ChatBot.jsx";
 
 function App() {
   return (
@@ -17,14 +17,10 @@ function App() {
       </div>
 
       {/* Floating ChatBot */}
-      <div className="fixed bottom-5 right-5 z-50">
-        <ChatBot />
+      <div className="fixed bottom-18 right-2 z-50">
+        {/* <ChatBot /> */}
       </div>
-
-      {/* Custom Cursor */}
       <Cursor />
-
-      {/* Main Content */}
       <Navbar />
       <Hero />
       <About />
