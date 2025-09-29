@@ -39,7 +39,7 @@ const Navbar = () => {
               {/* Animated underline */}
               <span
                 className={`
-                  absolute bottom-0 h-[2px] w-0 bg-indigo-600 rounded-full
+                  absolute bottom-0 h-[2px] w-0 bg-red-600 rounded-full
                   transition-all duration-300
                   ${active === label.toLowerCase() ? "w-full" : "group-hover:w-full"}
                 `}
