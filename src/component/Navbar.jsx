@@ -10,6 +10,7 @@ const Navbar = () => {
     { href: "#about", label: "About", icon: <User size={20} /> },
     { href: "#projects", label: "Projects", icon: <FolderKanban size={20} /> },
     { href: "#contact", label: "Contact", icon: <Mail size={20} /> },
+
   ];
 
   // Detect scroll direction
