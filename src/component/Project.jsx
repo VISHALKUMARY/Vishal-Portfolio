@@ -77,7 +77,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-4"
+      className="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-4xl font-extrabold tracking-tight mb-10 border-b-4 border-red-500 inline-block pb-2">
@@ -88,7 +88,7 @@ const Projects = () => {
           {projectJson.map((item, index) => (
             <div
               key={index}
-              className="w-full transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 rounded-2xl"
+              className="w-full transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 rounded-2xl cursor-pointer"
             >
               <Cards item={item} onImageClick={handleImageClick} />
             </div>
@@ -99,7 +99,7 @@ const Projects = () => {
       {/* ===== Image Modal ===== */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center px-4"
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center px-4 sm:px-6"
           onClick={closeModal}
         >
           <div
@@ -109,26 +109,33 @@ const Projects = () => {
             <button
               onClick={closeModal}
               className="absolute top-3 right-4 text-white text-3xl font-bold hover:text-red-500 transition"
+              aria-label="Close Modal"
             >
               &times;
             </button>
 
-            <h3 className="text-2xl font-semibold mb-4 text-center text-red-400">
+            <h3 className="text-2xl font-semibold mb-4 text-center text-red-400 select-none">
               {selectedImage.title}
             </h3>
+
             <img
               src={selectedImage.image}
               alt={selectedImage.title}
               className="w-full h-auto max-h-[75vh] object-contain rounded-lg border border-red-400/50 shadow-lg"
+              draggable={false}
             />
 
-            <div className="flex justify-center gap-4 mt-4">
+            <p className="mt-4 text-gray-300 text-center max-w-xl mx-auto px-2">
+              {selectedImage.desc}
+            </p>
+
+            <div className="flex justify-center gap-6 mt-6 flex-wrap">
               {selectedImage.live && (
                 <a
                   href={selectedImage.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-red-500 px-4 py-2 rounded-full text-white font-medium hover:bg-red-600 shadow-md transition"
+                  className="bg-red-500 px-6 py-2 rounded-full text-white font-medium hover:bg-red-600 shadow-md transition"
                 >
                   Live Demo
                 </a>
@@ -137,7 +144,7 @@ const Projects = () => {
                 href={selectedImage.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-red-500 px-4 py-2 rounded-full text-white font-medium hover:bg-red-500 hover:text-white shadow-md transition"
+                className="border border-red-500 px-6 py-2 rounded-full text-white font-medium hover:bg-red-500 hover:text-white shadow-md transition"
               >
                 GitHub
               </a>
@@ -145,6 +152,23 @@ const Projects = () => {
           </div>
         </div>
       )}
+
+      {/* Additional styling for accessibility and smoothness */}
+      <style jsx>{`
+        /* Smooth image loading */
+        img {
+          transition: transform 0.3s ease-in-out;
+        }
+
+        img:hover {
+          transform: scale(1.02);
+        }
+
+        /* Prevent text selection on modal title */
+        h3 {
+          user-select: none;
+        }
+      `}</style>
     </section>
   );
 };

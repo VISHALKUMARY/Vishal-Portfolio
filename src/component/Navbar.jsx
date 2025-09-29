@@ -4,81 +4,102 @@ import { Menu, X, User, FolderKanban, Mail } from "lucide-react";
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Optional: track active section, here simplified as example (can be improved)
+  const [active, setActive] = useState("about");
+
+  const links = [
+    { href: "#about", label: "About", icon: <User size={20} /> },
+    { href: "#projects", label: "Projects", icon: <FolderKanban size={20} /> },
+    { href: "#contact", label: "Contact", icon: <Mail size={20} /> },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/70 backdrop-blur-md shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md shadow-md">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 flex items-center justify-between h-16">
         {/* === Logo === */}
-        <h1 className="text-2xl font-extrabold tracking-wide text-red-500">&lt;Vishal/&gt;</h1>
+        <h1 className="text-3xl font-extrabold tracking-widest text-red-600 select-none">
+          &lt;Vishal/&gt;
+        </h1>
 
         {/* === Desktop Menu === */}
-        <nav className="hidden md:flex space-x-8 text-base font-medium">
-          <a
-            href="#about"
-            className="flex flex-col items-center text-gray-600 hover:text-indigo-600 transition-colors duration-300"
-          >
-            <User size={20} />
-            About
-          </a>
-          <a
-            href="#projects"
-            className="flex flex-col items-center text-gray-600 hover:text-indigo-600 transition-colors duration-300"
-          >
-            <FolderKanban size={20} />
-            Projects
-          </a>
-          <a
-            href="#contact"
-            className="flex flex-col items-center text-gray-600 hover:text-indigo-600 transition-colors duration-300"
-          >
-            <Mail size={20} />
-            Contact
-          </a>
+        <nav className="hidden md:flex space-x-10 text-base font-semibold">
+          {links.map(({ href, label, icon }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={() => setActive(label.toLowerCase())}
+              className={`
+                relative flex flex-col items-center text-gray-700 
+                hover:text-red-600 transition-colors duration-300
+                ${active === label.toLowerCase() ? "text-red-600" : ""}
+              `}
+            >
+              <div className="mb-1">{icon}</div>
+
+              {/* Animated underline */}
+              <span
+                className={`
+                  absolute bottom-0 h-[2px] w-0 bg-indigo-600 rounded-full
+                  transition-all duration-300
+                  ${active === label.toLowerCase() ? "w-full" : "group-hover:w-full"}
+                `}
+              />
+              <span className="relative">{label}</span>
+            </a>
+          ))}
         </nav>
 
         {/* === Mobile Toggle Button === */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden focus:outline-none"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          className="md:hidden p-2 rounded-md text-gray-700 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1"
         >
           {mobileMenuOpen ? (
-            <X className="w-6 h-6 text-gray-700" />
+            <X className="w-7 h-7" />
           ) : (
-            <Menu className="w-6 h-6 text-gray-700" />
+            <Menu className="w-7 h-7" />
           )}
         </button>
       </div>
 
       {/* === Mobile Menu === */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-md transition-all duration-300">
-          <nav className="px-4 py-3 flex justify-around text-center">
-            <a
-              href="#about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex flex-col items-center text-sm text-gray-700 hover:text-indigo-600"
-            >
-              <User size={24} />
-              <span className="mt-1">About</span>
-            </a>
-            <a
-              href="#projects"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex flex-col items-center text-sm text-gray-700 hover:text-indigo-600"
-            >
-              <FolderKanban size={24} />
-              <span className="mt-1">Projects</span>
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex flex-col items-center text-sm text-gray-700 hover:text-indigo-600"
-            >
-              <Mail size={24} />
-              <span className="mt-1">Contact</span>
-            </a>
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg animate-fade-in">
+          <nav className="flex flex-col py-4 space-y-3 text-center">
+            {links.map(({ href, label, icon }) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setActive(label.toLowerCase());
+                }}
+                className="flex flex-col items-center text-gray-700 hover:text-indigo-600 transition-colors duration-300"
+              >
+                {React.cloneElement(icon, { size: 26, className: "mb-1" })}
+                <span className="text-sm font-semibold">{label}</span>
+              </a>
+            ))}
           </nav>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease forwards;
+        }
+      `}</style>
     </header>
   );
 };
