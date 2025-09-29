@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X, User, FolderKanban, Mail } from "lucide-react";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Optional: track active section, here simplified as example (can be improved)
   const [active, setActive] = useState("about");
+  const [showNavbar, setShowNavbar] = useState(true);
 
   const links = [
     { href: "#about", label: "About", icon: <User size={20} /> },
@@ -13,8 +12,36 @@ const Navbar = () => {
     { href: "#contact", label: "Contact", icon: <Mail size={20} /> },
   ];
 
+  // Detect scroll direction
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      // Scrolling down
+      if (currentY > lastScrollY && currentY > 80) {
+        setShowNavbar(false);
+      }
+      // Scrolling up
+      else {
+        setShowNavbar(true);
+      }
+
+      lastScrollY = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md shadow-md">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-500 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      } border-b bg-white/80 backdrop-blur-md shadow-md`}
+    >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 flex items-center justify-between h-16">
         {/* === Logo === */}
         <h1 className="text-3xl font-extrabold tracking-widest text-red-600 select-none">
@@ -28,21 +55,16 @@ const Navbar = () => {
               key={href}
               href={href}
               onClick={() => setActive(label.toLowerCase())}
-              className={`
-                relative flex flex-col items-center text-gray-700 
+              className={`group relative flex flex-col items-center text-gray-700 
                 hover:text-red-600 transition-colors duration-300
-                ${active === label.toLowerCase() ? "text-red-600" : ""}
-              `}
+                ${active === label.toLowerCase() ? "text-red-600" : ""}`}
             >
               <div className="mb-1">{icon}</div>
 
-              {/* Animated underline */}
               <span
-                className={`
-                  absolute bottom-0 h-[2px] w-0 bg-red-600 rounded-full
+                className={`absolute bottom-0 h-[2px] w-0 bg-red-600 rounded-full
                   transition-all duration-300
-                  ${active === label.toLowerCase() ? "w-full" : "group-hover:w-full"}
-                `}
+                  ${active === label.toLowerCase() ? "w-full" : "group-hover:w-full"}`}
               />
               <span className="relative">{label}</span>
             </a>
@@ -55,11 +77,7 @@ const Navbar = () => {
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           className="md:hidden p-2 rounded-md text-gray-700 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1"
         >
-          {mobileMenuOpen ? (
-            <X className="w-7 h-7" />
-          ) : (
-            <Menu className="w-7 h-7" />
-          )}
+          {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
       </div>
 
@@ -75,7 +93,7 @@ const Navbar = () => {
                   setMobileMenuOpen(false);
                   setActive(label.toLowerCase());
                 }}
-                className="flex flex-col items-center text-gray-700 hover:text-indigo-600 transition-colors duration-300"
+                className="flex flex-col items-center text-gray-700 hover:text-red-600 transition-colors duration-300"
               >
                 {React.cloneElement(icon, { size: 26, className: "mb-1" })}
                 <span className="text-sm font-semibold">{label}</span>
@@ -85,6 +103,7 @@ const Navbar = () => {
         </div>
       )}
 
+      {/* === Animation Styles === */}
       <style jsx>{`
         @keyframes fade-in {
           from {
